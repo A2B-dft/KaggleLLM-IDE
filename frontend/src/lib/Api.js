@@ -5,6 +5,19 @@
 
 const BACKEND = import.meta.env.VITE_BACKEND_URL || "http://localhost:8000";
 
+export async function verifyCredentials({ kaggleUsername, kaggleApiKey }) {
+  const res = await fetch(`${BACKEND}/auth/verify`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      kaggle_username: kaggleUsername,
+      kaggle_api_key:  kaggleApiKey,
+    }),
+  });
+  if (!res.ok) throw new Error("Verification request failed");
+  return res.json(); // { valid, gpu_enabled, username, error? }
+}
+
 // ── Backend: session lifecycle ───────────────────────────────────────────
 
 export async function startSession({ kaggleUsername, kaggleApiKey, ngrokToken, model }) {

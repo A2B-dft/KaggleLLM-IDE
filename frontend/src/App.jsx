@@ -304,14 +304,23 @@ export default function App() {
 
   return (
     <>
-      {phase === "idle"      && <SetupScreen onLaunch={handleLaunch} />}
-      {phase === "launching" && <LaunchingScreen elapsed={elapsed} onCancel={stop} />}
-      {phase === "ready"     && <ChatScreen tunnelUrl={tunnelUrl} model={chosenModel} onStop={stop} />}
-      {phase === "error"     && (
+      {phase === "idle"       && <SetupScreen onLaunch={handleLaunch} />}
+      {phase === "verifying"  && (
+        <div className="launch-screen">
+          <div className="launch-card">
+            <div className="spinner-ring" />
+            <div className="launch-stage">Verifying Kaggle credentials...</div>
+            <p className="launch-note">Checking your API key and GPU access.</p>
+          </div>
+        </div>
+      )}
+      {phase === "launching"  && <LaunchingScreen elapsed={elapsed} onCancel={stop} />}
+      {phase === "ready"      && <ChatScreen tunnelUrl={tunnelUrl} model={chosenModel} onStop={stop} />}
+      {phase === "error"      && (
         <div className="error-screen">
           <div className="error-card">
             <div className="error-icon">✕</div>
-            <h2>Kernel failed to start</h2>
+            <h2>Something went wrong</h2>
             <p>{error}</p>
             <button className="launch-btn" onClick={stop}>← Try Again</button>
           </div>

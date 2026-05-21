@@ -25,6 +25,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
 from kaggle_runner import KaggleRunner
+from auth import router as auth_router
 
 # ── App setup ───────────────────────────────────────────────────────────────
 
@@ -40,6 +41,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+app.include_router(auth_router)
 
 # ── In-memory session store ─────────────────────────────────────────────────
 # For a single-user / small-team setup this is fine.
