@@ -2,6 +2,9 @@
 requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools.packages.find]
+where = ["kernel", "backend", "frontend"]
+
 [project]
 name = "kaggle-gpu-ide"
 version = "0.1.0"
