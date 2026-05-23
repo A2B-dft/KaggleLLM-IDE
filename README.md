@@ -190,4 +190,4 @@ Please keep PRs focused. One feature or fix per PR.
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+GNU — see [LICENSE](LICENSE).
